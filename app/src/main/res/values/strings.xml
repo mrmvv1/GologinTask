@@ -1,11 +1,9 @@
 <resources>
     <string name="app_name">MyTest</string>
 
-    <string name="email_enter">Enter Email</string>
-    <string name="password_enter">Enter password</string>
+    <string name="email_enter">E-Mail Address</string>
+    <string name="password_enter">Password</string>
     <string name="password_enter_again">Confirm password</string>
-
-    <string name="prompt_password">Enter Password</string>
 
     <string name="email">Email</string>
     <string name="userid">User Id</string>
@@ -17,7 +15,14 @@
     <string name="registration_success">Success!</string>
     <string name="login_error">Authorization error. Incorrect login or password.</string>
 
-    <string name="action_sign_in">Sign in</string>
-    <string name="action_register">Register</string>
+    <string name="email_error">Please enter a valid email address</string>
+    <string name="password_error">Please enter a password</string>
+    <string name="password2_error">Confirm password incorrect.</string>
+
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="log_in">Log In</string>
+    <string name="forgot_pass">Forgot Password?</string>
+    <string name="create_account">Create Account</string>
 
 </resources>

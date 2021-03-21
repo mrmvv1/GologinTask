@@ -1,11 +1,10 @@
-package com.example.mytest;
+package com.example.mytest.api;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.mytest.BuildConfig;
 import com.google.gson.Gson;
-
-import java.io.IOException;
 
 import okhttp3.Authenticator;
 import okhttp3.Credentials;

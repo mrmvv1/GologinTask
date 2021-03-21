@@ -1,6 +1,5 @@
-package com.example.mytest;
+package com.example.mytest.ui;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -11,12 +10,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.preference.PreferenceManager;
 
+import com.example.mytest.R;
+import com.example.mytest.api.ApiUtils;
+import com.example.mytest.common.BaseFragment;
 import com.example.mytest.model.ApiError;
-import com.example.mytest.model.NewUser;
-import com.example.mytest.model.Registration;
 import com.example.mytest.model.User;
 import com.google.gson.Gson;
 

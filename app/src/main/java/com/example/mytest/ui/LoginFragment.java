@@ -1,6 +1,5 @@
-package com.example.mytest;
+package com.example.mytest.ui;
 
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,33 +8,29 @@ import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.annotation.StringRes;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.preference.PreferenceManager;
 
+import com.example.mytest.R;
+import com.example.mytest.api.ApiUtils;
+import com.example.mytest.common.BaseFragment;
 import com.example.mytest.model.ApiError;
 import com.example.mytest.model.Login;
-import com.example.mytest.model.NewUser;
 import com.example.mytest.model.Registration;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 
 public class LoginFragment extends BaseFragment {
 
-    private EditText mEmail;
-    private EditText mPassword;
-    private Button mEnter;
-    private Button mRegister;
+    private TextInputLayout mEmailLayout, mPasswordLayout;
+    private TextInputEditText mEmail, mPassword;
+    private Button mSignin;
+    private Button mLogin;
     private ProgressBar mProgressBar;
 
     public static LoginFragment newInstance() {
@@ -46,7 +41,7 @@ public class LoginFragment extends BaseFragment {
         @Override
         public void onClick(View view) {
 
-            if (isEmailValid() && isPasswordValid()) {
+            if (isInputValid()) {
 
                 mProgressBar.setVisibility(View.VISIBLE);
 
@@ -124,8 +119,6 @@ public class LoginFragment extends BaseFragment {
                             }
                         });
 
-            } else {
-                showMessage(R.string.input_error);
             }
         }
     };
@@ -143,17 +136,6 @@ public class LoginFragment extends BaseFragment {
         }
     };
 
-
-    private boolean isEmailValid() {
-        return !TextUtils.isEmpty(mEmail.getText())
-                && Patterns.EMAIL_ADDRESS.matcher(mEmail.getText()).matches();
-    }
-
-    private boolean isPasswordValid() {
-        return !TextUtils.isEmpty(mPassword.getText());
-    }
-
-
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Nullable
     @Override
@@ -161,15 +143,50 @@ public class LoginFragment extends BaseFragment {
         View v = inflater.inflate(R.layout.fr_login, container, false);
 
         mEmail = v.findViewById(R.id.etEmail);
+        mEmailLayout = v.findViewById(R.id.loEmail);
         mPassword = v.findViewById(R.id.etPassword);
-        mEnter = v.findViewById(R.id.btLogin);
-        mRegister = v.findViewById(R.id.btRegister);
+        mPasswordLayout=v.findViewById(R.id.loPassword);
+        mSignin = v.findViewById(R.id.btSignin);
+        mLogin = v.findViewById(R.id.btLogin);
         mProgressBar=v.findViewById(R.id.loading);
 
-        mEnter.setOnClickListener(mOnEnterClickListener);
-        mRegister.setOnClickListener(mOnRegisterClickListener);
+        mSignin.setOnClickListener(mOnEnterClickListener);
+        mLogin.setOnClickListener(mOnRegisterClickListener);
 
         return v;
+    }
+
+    private boolean isInputValid() {
+        boolean emailvalid=isEmailValid();
+        boolean passwordvalid = isPasswordValid();
+        return emailvalid && passwordvalid;
+    }
+
+    private boolean isEmailValid() {
+        if (!TextUtils.isEmpty(mEmail.getText())
+                && Patterns.EMAIL_ADDRESS.matcher(mEmail.getText()).matches()) {
+            mEmailLayout.setErrorEnabled(false);
+            mEmail.setBackgroundResource(R.drawable.edit_field);
+            return true;
+        } else {
+            mEmailLayout.setErrorEnabled(true);
+            mEmail.setBackgroundResource(R.drawable.error_field);
+            mEmailLayout.setError(getString(R.string.email_error));
+            return false;
+        }
+    }
+
+    private boolean isPasswordValid() {
+        if (!TextUtils.isEmpty(mPassword.getText())) {
+            mPasswordLayout.setErrorEnabled(false);
+            mPassword.setBackgroundResource(R.drawable.edit_field );
+            return true;
+        } else {
+            mPasswordLayout.setErrorEnabled(true);
+            mPassword.setBackgroundResource(R.drawable.error_field );
+            mPasswordLayout.setError(getString(R.string.password_error));
+            return false;
+        }
     }
 
 

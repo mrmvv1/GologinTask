@@ -1,4 +1,4 @@
-package com.example.mytest;
+package com.example.mytest.ui;
 
 
 import android.content.SharedPreferences;
@@ -9,6 +9,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.PreferenceManager;
+
+import com.example.mytest.R;
+import com.example.mytest.common.SingleFragmentActivity;
 
 public class AuthActivity extends SingleFragmentActivity {
 

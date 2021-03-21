@@ -1,4 +1,4 @@
-package com.example.mytest;
+package com.example.mytest.api;
 
 import com.example.mytest.model.Login;
 import com.example.mytest.model.NewUser;

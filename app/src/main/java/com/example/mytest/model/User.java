@@ -4,17 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-/*
-    {
-        "_id": "string",
-            "email": "string",
-            "createdAt": "string",
-            "plan": {},
-        "needCard": true,
-            "hasTrial": true,
-            "trialDays": 0
-    }*/
-
 public class User implements Serializable {
 
     @SerializedName("_id")

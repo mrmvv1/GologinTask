@@ -5,8 +5,6 @@ import com.example.mytest.model.NewUser;
 import com.example.mytest.model.Registration;
 import com.example.mytest.model.User;
 
-import java.util.HashMap;
-
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;

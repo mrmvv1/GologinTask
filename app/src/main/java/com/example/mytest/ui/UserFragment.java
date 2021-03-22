@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 
 import com.example.mytest.R;
 import com.example.mytest.api.ApiUtils;
-import com.example.mytest.common.BaseFragment;
 import com.example.mytest.model.ApiError;
 import com.example.mytest.model.User;
 import com.google.gson.Gson;

@@ -17,7 +17,7 @@ public class AuthActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment getFragment() {
-        return LoginFragment.newInstance();
+        return SigninFragment.newInstance();
     }
 
     @Override

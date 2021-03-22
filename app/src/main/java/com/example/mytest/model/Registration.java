@@ -6,7 +6,6 @@ import java.io.Serializable;
 
 public class Registration implements Serializable  {
 
-
     @SerializedName("_id")
     private String mId;
     public String getId() {

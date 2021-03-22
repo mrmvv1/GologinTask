@@ -2,41 +2,39 @@ package com.example.mytest.ui;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.TextUtils;
-import android.util.Patterns;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.mytest.R;
 import com.example.mytest.api.ApiUtils;
-import com.example.mytest.common.BaseFragment;
 import com.example.mytest.model.ApiError;
 import com.example.mytest.model.NewUser;
 import com.example.mytest.model.Registration;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 
-import okhttp3.MediaType;
+public class SignupFragment extends BaseFragment {
 
-public class RegistrationFragment extends BaseFragment {
+    public static SignupFragment newInstance() {
+        return new SignupFragment();
+    }
 
-    public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-    private TextInputLayout mEmailLayout, mPasswordLayout, mPassword2Layout;
-    private TextInputEditText mEmail, mPassword, mPassword2;
+        mLabel.setText(R.string.sign_up);
 
-    private Button mSignup;
-    private ProgressBar mProgressBar;
+        mSign.setText(R.string.sign_up);
+        mSign.setOnClickListener(mOnRegistrationClickListener);
 
-    public static RegistrationFragment newInstance() {
-        return new RegistrationFragment();
+        mPasswordLayout.setEndIconMode(TextInputLayout.END_ICON_NONE);
+
+        mPassword2Layout.setVisibility(View.VISIBLE);
+
+        mAction.setText(R.string.create_account);
     }
 
     private View.OnClickListener mOnRegistrationClickListener = new View.OnClickListener() {
@@ -120,77 +118,12 @@ public class RegistrationFragment extends BaseFragment {
         }
     };
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fr_registration, container, false);
-
-        mEmail = view.findViewById(R.id.etEmail);
-        mEmailLayout = view.findViewById(R.id.loEmail);
-        mPassword = view.findViewById(R.id.etPassword);
-        mPasswordLayout = view.findViewById(R.id.loPassword);
-        mPassword2 = view.findViewById(R.id.etPassword2);
-        mPassword2Layout = view.findViewById(R.id.loPassword2);
-        mSignup = view.findViewById(R.id.btSignup);
-        mProgressBar = view.findViewById(R.id.loading);
-
-        mSignup.setOnClickListener(mOnRegistrationClickListener);
-
-        return view;
-    }
-
     private boolean isInputValid() {
         boolean emailvalid=isEmailValid();
         boolean passwordvalid = isPasswordValid();
         boolean password2valid = isPassword2Valid();
         return emailvalid && passwordvalid && password2valid;
     }
-
-    private boolean isEmailValid() {
-        if (!TextUtils.isEmpty(mEmail.getText())
-                && Patterns.EMAIL_ADDRESS.matcher(mEmail.getText()).matches()) {
-            mEmailLayout.setErrorEnabled(false);
-            mEmail.setBackgroundResource(R.drawable.edit_field);
-            return true;
-        } else {
-            mEmailLayout.setErrorEnabled(true);
-            mEmail.setBackgroundResource(R.drawable.error_field);
-            mEmailLayout.setError(getString(R.string.email_error));
-            return false;
-        }
-    }
-
-    private boolean isPasswordValid() {
-            if (!TextUtils.isEmpty(mPassword.getText())) {
-                mPasswordLayout.setErrorEnabled(false);
-                mPassword.setBackgroundResource(R.drawable.edit_field );
-                return true;
-            } else {
-                mPasswordLayout.setErrorEnabled(true);
-                mPassword.setBackgroundResource(R.drawable.error_field );
-                mPasswordLayout.setError(getString(R.string.password_error));
-                return false;
-            }
-    }
-
-    private boolean isPassword2Valid() {
-        String password = mPassword.getText().toString();
-        String passwordAgain = mPassword2.getText().toString();
-
-        if (password.equals(passwordAgain)) {
-            mPassword2Layout.setErrorEnabled(false);
-            mPassword2.setBackgroundResource(R.drawable.edit_field );
-            return true;
-        } else {
-            mPassword2Layout.setErrorEnabled(true);
-            mPassword2.setBackgroundResource(R.drawable.error_field );
-            mPassword2Layout.setError(getString(R.string.password2_error));
-            return false;
-        }
-
-    }
-
-
 
 }
 
